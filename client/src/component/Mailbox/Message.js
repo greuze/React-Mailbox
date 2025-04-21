@@ -90,6 +90,7 @@ const Message = () => {
     );
   };
   const dispatch = useDispatch();
+
   if (mails.length === 0) {
     return (
       <Container className="h-100">
@@ -99,6 +100,16 @@ const Message = () => {
       </Container>
     );
   }
+
+  const dateFormat = new Intl.DateTimeFormat("es-ES", {
+    timeZone: "UTC",
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+
   return (
     <>
       <div className="border-bottom py-2 px-1 d-flex align-items-center mt-5 mt-lg-0">
@@ -141,12 +152,18 @@ const Message = () => {
             <span className="fw-bold">De: </span>
             <span>{mail.sender}</span>
           </div>
-          <div className="pt-3">
+          <div className="pt-2">
             <span className="fw-bold">Para: </span>
-            <span>{`(${mail.recipient})`} </span>
+            <span>{mail.recipient}</span>
           </div>
-          <p className="fw-bold pt-5">Asunto: {mail.subject}</p>
-          <div className="mt-5 bg-light mx-lg-auto">
+          <div className="pt-2">
+            <span className="fw-bold">Fecha: </span>
+            <span>{dateFormat.format(new Date(mail.timestamp))}</span>
+          </div>
+          <div className="fw-bold pt-3">
+            <span>{mail.subject}</span>
+          </div>
+          <div className="mt-2 bg-light mx-lg-auto">
             <p>{mail.emailContent}</p>
           </div>
         </div>

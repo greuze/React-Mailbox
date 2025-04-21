@@ -16,7 +16,7 @@ const Logout = () => {
       variant="light"
       className="border-0 bg-gradient rounded-0"
     >
-      Logout
+      Cerrar sesión
     
     </Button>
   );

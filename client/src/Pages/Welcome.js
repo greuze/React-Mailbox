@@ -68,13 +68,7 @@ const Welcome = () => {
                       <div className="d-flex">
                         <span>
                           <i className="fs-4 pe-2 text-info bi bi-envelope-fill"></i>{" "}
-                          Inbox
-                        </span>
-                        <span className="pt-3 position-relative mx-auto">
-                          unread
-                          <span className="p-0 position-absolute top-0 end-0 text-warning">
-                            {unread}
-                          </span>{" "}
+                          Recibidos (<span className="p-0 top-0 end-0 text-warning">{unread}</span> nuevos)
                         </span>
                       </div>{" "}
                     </ToggleButton>
@@ -88,7 +82,7 @@ const Welcome = () => {
                       onClick={onClickHandler}
                     >
                       <i className="fs-4 pe-2 text-info bi bi-send-check-fill"></i>{" "}
-                      Sent
+                      Enviados
                     </ToggleButton>
                   </NavLink>
                   <NavLink
@@ -103,7 +97,7 @@ const Welcome = () => {
                       onClick={onClickHandler}
                     >
                       <i className="fs-4 pe-2 text-info bi bi-pencil-fill"></i>{" "}
-                      Compose
+                      Redactar
                     </ToggleButton>
                   </NavLink>
                   <NavLink to="/welcome/trash" activeClassName={"bg-success"}>
@@ -114,7 +108,7 @@ const Welcome = () => {
                       className="rounded-0 w-100 text-start py-2 border-0 text-light"
                       onClick={onClickHandler}
                     >
-                      <i className="fs-4 pe-2 text-info bi bi-trash3"></i> Trash
+                      <i className="fs-4 pe-2 text-info bi bi-trash3"></i> Papelera
                     </ToggleButton>
                   </NavLink>
                   <NavLink to="/welcome/starred" activeClassName={"bg-success"}>
@@ -126,7 +120,7 @@ const Welcome = () => {
                       onClick={onClickHandler}
                     >
                       <i className="bi fs-4 pe-2 text-info bi-star-fill"></i>{" "}
-                      Starred
+                      Destacados
                     </ToggleButton>
                   </NavLink>
                 </ButtonGroup>

@@ -7,7 +7,8 @@
         "sender": "bob@mail.test",
         "starred": false,
         "subject": "Greetings",
-        "trashed": false
+        "trashed": false,
+        "timestamp": "2025-04-21T12:00:00Z"
     },
     {
         "id": "mb0002",
@@ -17,7 +18,8 @@
         "sender": "bob@mail.test",
         "starred": false,
         "subject": "Test",
-        "trashed": false
+        "trashed": false,
+        "timestamp": "2025-04-21T13:05:00Z"
     },
     {
         "id": "mb0003",
@@ -28,7 +30,8 @@
         "sender": "alice@mail.test",
         "starred": false,
         "subject": "1111",
-        "trashed": false
+        "trashed": false,
+        "timestamp": "2025-04-21T14:50:00Z"
     },
     {
         "id": "mb0004",
@@ -39,7 +42,8 @@
         "sender": "alice@mail.test",
         "starred": false,
         "subject": "jskadhgf ",
-        "trashed": true
+        "trashed": true,
+        "timestamp": "2025-04-20T15:12:00Z"
     },
     {
         "id": "mb0005",
@@ -50,6 +54,7 @@
         "sender": "alice@mail.test",
         "starred": true,
         "subject": "Secret ",
-        "trashed": false
+        "trashed": false,
+        "timestamp": "2025-04-19T22:30:00Z"
     }
 ]
