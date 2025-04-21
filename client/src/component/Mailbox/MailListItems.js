@@ -1,11 +1,9 @@
 import { ListGroup, Row, Col, Form } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-import { setChecked } from "../../store/mailSlice";
+import { setChecked , setRead , toggleStarred } from "../../store/mailSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { setRead } from "../../store/mailSlice";
 import { useState } from "react";
-import { toggleStarred } from "../../store/mailSlice";
-import useAxiosFetch from "../../hooks/useAxiosFetch.";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 const MailListItems = (props) => {
   const { mail } = props;
   const email = useSelector((state) => state.auth.email);

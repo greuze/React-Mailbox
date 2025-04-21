@@ -1,0 +1,42 @@
+{
+    "-OO9UadmW-2L4HOt3kXH": {
+        "emailContent": "Hola",
+        "hasRead": false,
+        "recipient": "alice@mail.test",
+        "sender": "bob@mail.test",
+        "starred": false,
+        "subject": "qwe",
+        "trashed": false
+    },
+    "-OO9X7mQazSS5n6AhdFd": {
+        "emailContent": "1245sadfasdf ",
+        "hasRead": false,
+        "recipient": "alice@mail.com",
+        "sender": "bob@mail.test",
+        "starred": false,
+        "subject": "Test",
+        "trashed": false
+    },
+    "-OO9_TxMxyu7r_mzpjDK": {
+        "emailContent": "Hola",
+        "hasRead": true,
+        "id": "-OO9_TxMxyu7r_mzpjDK",
+        "isChecked": false,
+        "recipient": "bob@mail.test",
+        "sender": "alice@mail.test",
+        "starred": false,
+        "subject": "1111",
+        "trashed": false
+    },
+    "-OO9_i-OOMIR9iLX_IKP": {
+        "emailContent": "ADAWd er tewrt wert  wert wer ter \n\nwerwer\n\nwq23423423423423  234 23234234 234234 234 23423 4🤗\n\n😈",
+        "hasRead": true,
+        "id": "-OO9_i-OOMIR9iLX_IKP",
+        "isChecked": false,
+        "recipient": "bob@mail.test",
+        "sender": "alice@mail.test",
+        "starred": false,
+        "subject": "jskadhgf ",
+        "trashed": false
+    }
+}

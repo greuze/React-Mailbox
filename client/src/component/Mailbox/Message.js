@@ -4,7 +4,7 @@ import { Container, Button } from "react-bootstrap";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { moveToTrash, deleteForever } from "../../store/mailSlice";
 import { showNotification } from "../../store/authSlice";
-import useAxiosFetch from "../../hooks/useAxiosFetch.";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 const Message = () => {
   const { messageId } = useParams();
   const location = useLocation();
