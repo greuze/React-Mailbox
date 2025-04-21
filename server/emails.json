@@ -1,26 +1,28 @@
-{
-    "-OO9UadmW-2L4HOt3kXH": {
+[
+    {
+        "id": "mb0001",
         "emailContent": "Hola",
         "hasRead": false,
         "recipient": "alice@mail.test",
         "sender": "bob@mail.test",
         "starred": false,
-        "subject": "qwe",
+        "subject": "Greetings",
         "trashed": false
     },
-    "-OO9X7mQazSS5n6AhdFd": {
+    {
+        "id": "mb0002",
         "emailContent": "1245sadfasdf ",
         "hasRead": false,
-        "recipient": "alice@mail.com",
+        "recipient": "alice@mail.test",
         "sender": "bob@mail.test",
         "starred": false,
         "subject": "Test",
         "trashed": false
     },
-    "-OO9_TxMxyu7r_mzpjDK": {
+    {
+        "id": "mb0003",
         "emailContent": "Hola",
         "hasRead": true,
-        "id": "-OO9_TxMxyu7r_mzpjDK",
         "isChecked": false,
         "recipient": "bob@mail.test",
         "sender": "alice@mail.test",
@@ -28,15 +30,26 @@
         "subject": "1111",
         "trashed": false
     },
-    "-OO9_i-OOMIR9iLX_IKP": {
+    {
+        "id": "mb0004",
         "emailContent": "ADAWd er tewrt wert  wert wer ter \n\nwerwer\n\nwq23423423423423  234 23234234 234234 234 23423 4🤗\n\n😈",
         "hasRead": true,
-        "id": "-OO9_i-OOMIR9iLX_IKP",
         "isChecked": false,
         "recipient": "bob@mail.test",
         "sender": "alice@mail.test",
         "starred": false,
         "subject": "jskadhgf ",
+        "trashed": true
+    },
+    {
+        "id": "mb0005",
+        "emailContent": "Super secret email",
+        "hasRead": true,
+        "isChecked": false,
+        "recipient": "boss@mail.test",
+        "sender": "alice@mail.test",
+        "starred": true,
+        "subject": "Secret ",
         "trashed": false
     }
-}
+]

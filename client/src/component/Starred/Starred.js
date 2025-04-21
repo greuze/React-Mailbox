@@ -1,13 +1,15 @@
-import Selector from "../Mailbox/Selector";
 import { Button, ListGroup } from "react-bootstrap";
-import LoadingSpinner from "../UI/LoadingSpinner";
-import MailListItems from "../Mailbox/MailListItems";
 import { useDispatch, useSelector } from "react-redux";
-import {  moveFromStarred } from "../../store/mailSlice";
-import { showNotification } from "../../store/authSlice";
 import axios from "axios";
-import useUnselect from "../../hooks/useUnselect";
+import Selector from "../Mailbox/Selector";
+import LoadingSpinner from "../UI/LoadingSpinner";
 import EmptyMessage from "../UI/EmptyMessage";
+import MailListItems from "../Mailbox/MailListItems";
+import { moveFromStarred } from "../../store/mailSlice";
+import { showNotification } from "../../store/authSlice";
+import useUnselect from "../../hooks/useUnselect";
+import { config } from "../../config";
+
 const Starred = () => {
   const mails = useSelector((state) => state.mail.mails);
   const email = useSelector((state) => state.auth.email);
@@ -16,11 +18,12 @@ const Starred = () => {
   const senderMail = email.replace(/[.]/g, "");
   const starredMails = mails.filter((mail) => mail.starred && !mail.trashed);
   const isDeleteEnabled = starredMails.some((mail) => mail.isChecked);
-  const url1 = `https://react-mailbox-client-4f470-default-rtdb.firebaseio.com/emails`;
-  const url2 = `https://react-mailbox-client-4f470-default-rtdb.firebaseio.com/sent-emails/${senderMail}`;
+  const url1 = `${config.apiUrl}/emails`;
+  const url2 = `${config.apiUrl}/sent-emails/${senderMail}`;
 
   const onDeleteHandler = async () => {
     try {
+      /*
       const updatedPromises = starredMails
         .filter((mail) => mail.isChecked)
         .map((mail) =>
@@ -37,12 +40,8 @@ const Starred = () => {
         );
       await Promise.all(updatedPromises);
       dispatch(moveFromStarred("toTrash"));
-      dispatch(
-        showNotification({
-          message: "Moved to Trash!",
-          variant: "success",
-        })
-      );
+      */
+      dispatch(showNotification({ message: "¡Operación bloqueada por orden judicial!", variant: "danger" }));
     } catch (error) {
       const { data } = error.response;
       console.log(data.error.message);
@@ -62,7 +61,7 @@ const Starred = () => {
           >
             <p className="mx-auto p-0 m-0">
               <i className="bi text-warning pe-2 bi-trash3"></i>
-              <span className="">Delete</span>
+              <span className="">Borrar</span>
             </p>
           </Button>
         </div>
@@ -72,7 +71,7 @@ const Starred = () => {
           <LoadingSpinner />
         </div>
       ) : starredMails.length === 0 ? (
-        <EmptyMessage message= "No starred messages!" />
+        <EmptyMessage message= "¡No tienes mensajes destacados!" />
       ) : (
         <ListGroup variant="flush">
           {starredMails.map((mail) => (

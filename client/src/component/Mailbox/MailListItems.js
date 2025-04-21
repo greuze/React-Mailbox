@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { ListGroup, Row, Col, Form } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-import { setChecked , setRead , toggleStarred } from "../../store/mailSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { setChecked , setRead , toggleStarred } from "../../store/mailSlice";
+import { showNotification } from "../../store/authSlice";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
+import { config } from "../../config";
+
 const MailListItems = (props) => {
   const { mail } = props;
   const email = useSelector((state) => state.auth.email);
@@ -34,23 +37,28 @@ const MailListItems = (props) => {
 
   const url =
     mail.sender === email
-      ? `https://react-mailbox-client-4f470-default-rtdb.firebaseio.com/sent-emails/${senderMail}/${mail.id}.json`
-      : `https://react-mailbox-client-4f470-default-rtdb.firebaseio.com/emails/${mail.id}.json`;
+      ? `${config.apiUrl}/sent-emails/${senderMail}/${mail.id}.json`
+      : `${config.apiUrl}/emails/${mail.id}.json`;
 
   const starClickHandler = (event) => {
     event.stopPropagation();
     event.preventDefault();
+
+    /*
     dispatch(toggleStarred({ id: mail.id }));
 
     modifyMail(url, "PUT", {
       ...mail,
       starred: !mail.starred,
     });
+    */
+   dispatch(showNotification({ message: "¡Operación bloqueada por orden judicial!", variant: "danger" }));
   };
 
   const onClickHandler = () => {
     dispatch(setChecked({ id: null, selector: "none" }));
 
+    /*
     const onSuccess = (response) => {
       if (response.status === 200) {
         dispatch(setRead({ id: mail.id }));
@@ -68,6 +76,8 @@ const MailListItems = (props) => {
         onSuccess
       );
     }
+    */
+    dispatch(setRead({ id: mail.id }));
   };
 
   return (

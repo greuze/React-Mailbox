@@ -1,0 +1,17 @@
+[
+    {
+        "email": "alice@mail.test",
+        "active": true,
+        "displayName": "Alice",
+        "password": "12345678"
+    },
+    {
+        "email": "bob@mail.test",
+        "password": "11111111"
+    },
+    {
+        "email": "boss@mail.test",
+        "active": false,
+        "password": "bossboss"
+    }
+]

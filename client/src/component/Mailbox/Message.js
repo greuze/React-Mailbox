@@ -5,6 +5,8 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 import { moveToTrash, deleteForever } from "../../store/mailSlice";
 import { showNotification } from "../../store/authSlice";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
+import { config } from "../../config";
+
 const Message = () => {
   const { messageId } = useParams();
   const location = useLocation();
@@ -19,11 +21,12 @@ const Message = () => {
   if (mails.length > 0) {
     url =
       mail.sender === email
-        ? `https://react-mailbox-client-4f470-default-rtdb.firebaseio.com/sent-emails/${senderMail}/${mail.id}.json`
-        : `https://react-mailbox-client-4f470-default-rtdb.firebaseio.com/emails/${mail.id}.json`;
+        ? `${config.apiUrl}/sent-emails/${senderMail}/${mail.id}.json`
+        : `${config.apiUrl}/emails/${mail.id}.json`;
   }
 
   const moveToTrashHandler = () => {
+    /*
     const onSuccess = (response) => {
       if (response.status === 200) {
         dispatch(moveToTrash(messageId));
@@ -51,9 +54,12 @@ const Message = () => {
       },
       onSuccess
     );
+    */
+    dispatch(showNotification({ message: "¡Operación bloqueada por orden judicial!", variant: "danger" }));
   };
 
   const deleteForeverHandler = () => {
+    /*
     dispatch(deleteForever({ id: messageId }));
     history.replace("/welcome/trash");
     const onSuccess = (response) => {
@@ -68,6 +74,8 @@ const Message = () => {
     };
 
     modifyMail(url, "DELETE", null, onSuccess);
+    */
+    dispatch(showNotification({ message: "¡Operación bloqueada por orden judicial!", variant: "danger" }));
   };
 
   const onBackHandler = () => {
@@ -111,7 +119,7 @@ const Message = () => {
           >
             <p className="mx-auto p-0 m-0">
               <i className="bi text-warning pe-2 bi-trash3"></i>
-              <span className="">Delete</span>
+              <span className="">Borrar</span>
             </p>
           </Button>
         ) : (
@@ -122,7 +130,7 @@ const Message = () => {
           >
             <p className="mx-auto p-0 m-0">
               <i className="bi text-warning pe-2 bi-trash3"></i>
-              <span className="">Delete Forever</span>
+              <span className="">Borrar para siempre</span>
             </p>
           </Button>
         )}
@@ -130,14 +138,14 @@ const Message = () => {
       <div style={{ maxHeight: "80vh" }} className="overflow-auto">
         <div className="px-3">
           <div className="pt-3">
-            <span className="fw-bold">From: </span>
+            <span className="fw-bold">De: </span>
             <span>{mail.sender}</span>
           </div>
           <div className="pt-3">
-            <span className="fw-bold">To: </span>
+            <span className="fw-bold">Para: </span>
             <span>{`(${mail.recipient})`} </span>
           </div>
-          <p className="fw-bold pt-5">Subject: {mail.subject}</p>
+          <p className="fw-bold pt-5">Asunto: {mail.subject}</p>
           <div className="mt-5 bg-light mx-lg-auto">
             <p>{mail.emailContent}</p>
           </div>

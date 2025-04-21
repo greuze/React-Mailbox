@@ -9,10 +9,10 @@ const ConfirmDelete = (props) => {
       centered
     >
       <Modal.Header className="border-0" closeButton>
-        <Modal.Title>Confirm deleting messages</Modal.Title>
+        <Modal.Title>Confirmar borrar mensajes</Modal.Title>
       </Modal.Header>
       <Modal.Body className="border-0">
-        This action will delete all the conversations in trash permanently!
+        ¡Esta acción borrará todos los mensajes permanentemente!
       </Modal.Body>
       <Modal.Footer className="border-0">
         <Button

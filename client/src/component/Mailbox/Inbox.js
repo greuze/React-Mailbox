@@ -8,6 +8,8 @@ import { showNotification } from "../../store/authSlice";
 import Selector from "./Selector";
 import useUnselect from "../../hooks/useUnselect";
 import EmptyMessage from "../UI/EmptyMessage";
+import { config } from "../../config";
+
 const Inbox = () => {
   const mails = useSelector((state) => state.mail.mails);
   const dispatch = useDispatch();
@@ -21,11 +23,12 @@ const Inbox = () => {
 
   const onDeleteHandler = async () => {
     try {
+      /*
       const updatedPromises = filteredMails
         .filter((mail) => mail.isChecked)
         .map((mail) =>
           axios.put(
-            `https://react-mailbox-client-4f470-default-rtdb.firebaseio.com/emails/${mail.id}.json`,
+            `${config.apiUrl}/emails/${mail.id}.json`,
             {
               ...mail,
               isChecked: false,
@@ -37,9 +40,8 @@ const Inbox = () => {
       await Promise.all(updatedPromises);
 
       dispatch(moveFromInbox({ move: "toTrash", email: email }));
-      dispatch(
-        showNotification({ message: "Moved to trash!", variant: "success" })
-      );
+      */
+      dispatch(showNotification({ message: "¡Operación bloqueada por orden judicial!", variant: "danger" }));
     } catch (error) {
       console.log(error.message);
     }
@@ -59,7 +61,7 @@ const Inbox = () => {
           >
             <p className="mx-auto p-0 m-0">
               <i className="bi text-warning pe-2 bi-trash3"></i>
-              <span className="">Delete</span>
+              <span className="">Borrar</span>
             </p>
           </Button>
         </div>
@@ -69,7 +71,7 @@ const Inbox = () => {
           <LoadingSpinner />
         </div>
       ) : filteredMails.length === 0 ? (
-        <EmptyMessage message = "Your inbox is empty!"/>
+        <EmptyMessage message = "¡Tu bandeja está vacía!"/>
       ) : (
         <ListGroup variant="flush" className="overflow-auto">
           {filteredMails.map((mail) => (

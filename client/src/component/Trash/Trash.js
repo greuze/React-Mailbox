@@ -1,19 +1,17 @@
+import { useState } from "react";
 import { Button, ListGroup } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import ConfirmDelete from "./ConfirmDelete";
 import MailListItems from "../Mailbox/MailListItems";
 import Selector from "../Mailbox/Selector";
-import ConfirmDelete from "./ConfirmDelete";
-import {
-  moveFromInbox,
-  moveFromSentbox,
-} from "../../store/mailSlice";
-import { useState } from "react";
-import axios from "axios";
-import { showNotification } from "../../store/authSlice";
 import LoadingSpinner from "../UI/LoadingSpinner";
-import { emptyTrash } from "../../store/mailSlice";
-import useUnselect from "../../hooks/useUnselect";
 import EmptyMessage from "../UI/EmptyMessage";
+import { moveFromInbox, moveFromSentbox, emptyTrash } from "../../store/mailSlice";
+import { showNotification } from "../../store/authSlice";
+import useUnselect from "../../hooks/useUnselect";
+import { config } from "../../config";
+
 const Trash = () => {
   const mails = useSelector((state) => state.mail.mails);
   const email = useSelector((state) => state.auth.email);
@@ -30,11 +28,12 @@ const Trash = () => {
 
   const isDeleteEnabled = filteredMails.some((item) => item.isChecked);
 
-  const url1 = `https://react-mailbox-client-4f470-default-rtdb.firebaseio.com/emails`;
-  const url2 = `https://react-mailbox-client-4f470-default-rtdb.firebaseio.com/sent-emails/${senderMail}`;
+  const url1 = `${config.apiUrl}/emails`;
+  const url2 = `${config.apiUrl}/sent-emails/${senderMail}`;
 
   const onRestoreHandler = async () => {
     try {
+      /*
       const updatedPromises = filteredMails
         .filter((mail) => mail.isChecked)
         .map((mail) =>
@@ -51,20 +50,18 @@ const Trash = () => {
         );
 
       await Promise.all(updatedPromises);
-      dispatch(
-        showNotification({
-          message: "Restored! ",
-          variant: "success",
-        })
-      );
+
       dispatch(moveFromInbox({ move: "toInbox", email: email }));
       dispatch(moveFromSentbox({ move: "toSentbox", email: email }));
+      */
+      dispatch(showNotification({ message: "¡Operación bloqueada por orden judicial!", variant: "danger" }));
     } catch (error) {
       console.log(error.message);
     }
   };
 
   const emptyTrashHandler = async () => {
+    /*
     try {
       const updatedPromises = filteredMails.map((mail) =>
         axios.delete(
@@ -87,6 +84,9 @@ const Trash = () => {
       const {data} = error.response;
       console.log(data.error.message);
     }
+    */
+    dispatch(showNotification({ message: "¡Operación bloqueada por orden judicial!", variant: "danger" }));
+    setShow(false);
   };
 useUnselect(dispatch)
   return (
@@ -109,7 +109,7 @@ useUnselect(dispatch)
             className="border-0 me-3"
             onClick={handleShow}
           >
-            Empty Trash Now
+            Vaciar papelera
           </Button>
           <Button
             disabled={!isDeleteEnabled}
@@ -118,7 +118,7 @@ useUnselect(dispatch)
             className="border-0 "
             onClick={onRestoreHandler}
           >
-            Restore
+            Restaurar
           </Button>
         </div>
       </div>
@@ -127,7 +127,7 @@ useUnselect(dispatch)
           <LoadingSpinner />
         </div>
       ) : filteredMails.length === 0 ? (
-        <EmptyMessage message = "No conversations in Trash!"/>
+        <EmptyMessage message = "¡No hay mensajes en la papelera!"/>
       ) : (
         <ListGroup
           variant="flush"

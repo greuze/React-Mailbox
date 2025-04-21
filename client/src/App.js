@@ -1,54 +1,29 @@
 import { useEffect } from "react";
-import SignUp from "./component/userAuth/SignUp";
-import Welcome from "./Pages/Welcome";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
+import SignUp from "./component/userAuth/SignUp";
+import Welcome from "./Pages/Welcome";
 import { addToInbox, clearInbox } from "./store/mailSlice";
 import useAxiosFetch from "./hooks/useAxiosFetch";
+import { config } from "./config";
 
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const recipientMail = useSelector((state) => state.auth.email);
 
   const { fetchData: fetchMails } = useAxiosFetch();
-  const email = isAuthenticated ? recipientMail.replace(/[.]/g, "") : undefined;
-  const mails = useSelector((state) => state.mail.mails);
   const dispatch = useDispatch();
-  const url1 =
-    "http://localhost:9000/emails";
-  const url2 = `http://localhost:9000/${email}.json`;
+  const url = `${config.apiUrl}/emails`;
 
-  const urls = [url1, url2];
+    useEffect(() => {
+    const onSuccess = (response) => {
+      const mails = response?.data;
 
-  useEffect(() => {
-    const onSuccess = (responses) => {
-      const receivedMails = responses[0]?.data;
-      const sentMails = responses[1]?.data;
-
-      const inboxMails = receivedMails
-        ? Object.entries(receivedMails)
-            .filter(([key, mail]) => mail.recipient === recipientMail)
-            .map(([key, mail]) => ({
-              ...mail,
-              id: key,
-              isChecked: false,
-            }))
-        : [];
-
-      const sentMailItems = sentMails
-        ? Object.entries(sentMails).map(([key, mail]) => ({
-            ...mail,
-            id: key,
-            isChecked: false,
-          }))
-        : [];
-
-      const allMails = [...sentMailItems, ...inboxMails];
-      dispatch(addToInbox(allMails));
+      dispatch(addToInbox(mails));
     };
 
     if (recipientMail) {
-      fetchMails(urls, "GET", null, onSuccess);
+      fetchMails(url, "POST", {email: recipientMail}, onSuccess);
     }
 
     return () => {
@@ -56,38 +31,6 @@ function App() {
     };
     // eslint-disable-next-line
   }, [recipientMail, dispatch, fetchMails]);
-
-  useEffect(() => {
-    const onSuccess = (response) => {
-      const data = response.data;
-      const arr = [];
-      for (const key in data) {
-        const mailItem = {
-          ...data[key],
-          id: key,
-          isChecked: false,
-        };
-        if (mailItem.recipient === recipientMail) {
-          arr.push(mailItem);
-        }
-      }
-      arr.forEach((mail) => {
-        if (!mails.some((email) => email.id === mail.id)) {
-          dispatch(addToInbox([mail]));
-        }
-      });
-    };
-
-    const interval = setInterval(() => {
-      if (recipientMail) {
-        fetchMails(url1, "GET", null, onSuccess);
-      }
-    }, 10000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [fetchMails, recipientMail, mails, dispatch]);
 
   return (
     <Switch>

@@ -1,12 +1,13 @@
-import { Editor } from "react-draft-wysiwyg";
-import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { Form, Button, InputGroup } from "react-bootstrap";
 import { useRef, useState } from "react";
-import { EditorState } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import { Form, Button, InputGroup } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { showNotification } from "../../store/authSlice";
 import axios from "axios";
+import { EditorState } from "draft-js";
+import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { showNotification } from "../../store/authSlice";
 import { addToInbox } from "../../store/mailSlice";
+import { config } from "../../config";
 
 const MailboxEditor = () => {
   const toRef = useRef();
@@ -23,6 +24,7 @@ const MailboxEditor = () => {
   };
 
   const onSubmitHandler = async (e) => {
+    /*
     setIsLoading(true);
     e.preventDefault();
 
@@ -43,8 +45,8 @@ const MailboxEditor = () => {
     if (emailInfo.recipient !== emailInfo.sender) {
       try {
         const url1 =
-          "https://react-mailbox-client-4f470-default-rtdb.firebaseio.com/emails.json";
-        const url2 = `https://react-mailbox-client-4f470-default-rtdb.firebaseio.com/sent-emails/${email}.json`;
+          `${config.apiUrl}/emails.json`;
+        const url2 = `${config.apiUrl}/sent-emails/${email}.json`;
 
         const requests = [
           axios.post(url1, emailInfo),
@@ -75,45 +77,48 @@ const MailboxEditor = () => {
       alert("Cannot send mail to your own mail id");
       setIsLoading(false);
     }
+    */
+    dispatch(showNotification({ message: "¡Operación bloqueada por orden judicial!", variant: "danger" }));
   };
 
   return (
-    <>
-      <Form onSubmit={onSubmitHandler} className="p-3 mt-5 mt-lg-0">
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">To</InputGroup.Text>
-          <Form.Control
-            type="email"
-            placeholder="example@gmail.com"
-            ref={toRef}
-            required
-          />
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon2">Subject</InputGroup.Text>
-          <Form.Control type="text" placeholder="" ref={subjectRef} required />
-        </InputGroup>
-        <Form.Group className="mb-3" controlId="textEditor">
-          <Editor
-            toolbarClassName="py-3 border-bottom bg-light"
-            wrapperClassName="card mt-3"
-            editorClassName="card-body pt-0"
-            editorStyle={{ minHeight: "15rem" }}
-            editorState={editorState}
-            onEditorStateChange={handleEditorStateChange}
-          />
-        </Form.Group>
-        <div>
-          <Button
-            type="submit"
-            variant="danger"
-            className="bg-gradient shadow rounded-0 px-4"
-          >
-            {isLoading ? "Sending" : "Send"}
-          </Button>
-        </div>
-      </Form>
-    </>
+//    <Form onSubmit={onSubmitHandler} className="p-3 mt-5 mt-lg-0">
+    <div className="p-3 mt-5 mt-lg-0">
+      <InputGroup className="mb-3">
+        <InputGroup.Text id="basic-addon1">Para</InputGroup.Text>
+        <Form.Control
+          type="email"
+          placeholder="nombre@mail.test"
+          ref={toRef}
+          required
+        />
+      </InputGroup>
+      <InputGroup className="mb-3">
+        <InputGroup.Text id="basic-addon2">Asunto</InputGroup.Text>
+        <Form.Control type="text" placeholder="" ref={subjectRef} required />
+      </InputGroup>
+      <Form.Group className="mb-3" controlId="textEditor">
+        <Editor
+          toolbarClassName="py-3 border-bottom bg-light"
+          wrapperClassName="card mt-3"
+          editorClassName="card-body pt-0"
+          editorStyle={{ minHeight: "15rem" }}
+          editorState={editorState}
+          onEditorStateChange={handleEditorStateChange}
+        />
+      </Form.Group>
+      <div>
+        <Button
+          type="submit"
+          variant="danger"
+          className="bg-gradient shadow rounded-0 px-4"
+          onClick={onSubmitHandler}
+        >
+          {isLoading ? "Enviando..." : "Enviar"}
+        </Button>
+      </div>
+    </div>
+//    </Form>
   );
 };
 
