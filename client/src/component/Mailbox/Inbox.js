@@ -1,14 +1,11 @@
 import { ListGroup, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
 import MailListItems from "./MailListItems";
-import { moveFromInbox} from "../../store/mailSlice";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { showNotification } from "../../store/authSlice";
 import Selector from "./Selector";
 import useUnselect from "../../hooks/useUnselect";
 import EmptyMessage from "../UI/EmptyMessage";
-import { config } from "../../config";
 
 const Inbox = () => {
   const mails = useSelector((state) => state.mail.mails);
@@ -22,29 +19,7 @@ const Inbox = () => {
   const isDeleteEnabled = filteredMails.some((mail) => mail.isChecked);
 
   const onDeleteHandler = async () => {
-    try {
-      /*
-      const updatedPromises = filteredMails
-        .filter((mail) => mail.isChecked)
-        .map((mail) =>
-          axios.put(
-            `${config.apiUrl}/emails/${mail.id}.json`,
-            {
-              ...mail,
-              isChecked: false,
-              trashed: true,
-            }
-          )
-        );
-
-      await Promise.all(updatedPromises);
-
-      dispatch(moveFromInbox({ move: "toTrash", email: email }));
-      */
-      dispatch(showNotification({ message: "¡Operación bloqueada por orden judicial!", variant: "danger" }));
-    } catch (error) {
-      console.log(error.message);
-    }
+    dispatch(showNotification({ message: "¡Operación bloqueada por orden judicial!", variant: "danger" }));
   };
   useUnselect(dispatch)
 

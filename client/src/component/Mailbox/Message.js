@@ -2,10 +2,7 @@ import { useParams, useHistory, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Button } from "react-bootstrap";
 import LoadingSpinner from "../UI/LoadingSpinner";
-import { moveToTrash, deleteForever } from "../../store/mailSlice";
 import { showNotification } from "../../store/authSlice";
-import useAxiosFetch from "../../hooks/useAxiosFetch";
-import { config } from "../../config";
 
 const Message = () => {
   const { messageId } = useParams();
@@ -13,68 +10,12 @@ const Message = () => {
   const mails = useSelector((state) => state.mail.mails);
   const mail = mails.find((mail) => mail.id === messageId);
   const history = useHistory();
-  const email = useSelector((state) => state.auth.email);
-  const senderMail = email.replace(/[.]/g, "");
-  const { fetchData: modifyMail } = useAxiosFetch();
-  let url;
-
-  if (mails.length > 0) {
-    url =
-      mail.sender === email
-        ? `${config.apiUrl}/sent-emails/${senderMail}/${mail.id}.json`
-        : `${config.apiUrl}/emails/${mail.id}.json`;
-  }
 
   const moveToTrashHandler = () => {
-    /*
-    const onSuccess = (response) => {
-      if (response.status === 200) {
-        dispatch(moveToTrash(messageId));
-        dispatch(
-          showNotification({ message: "Moved to trash!", variant: "success" })
-        );
-        history.replace(
-          location.pathname === `/welcome/inbox/${mail.id}`
-            ? "/welcome/inbox"
-            : location.pathname === `/welcome/trash/${mail.id}`
-            ? "/welcome/trash"
-            : location.pathname === `/welcome/sent/${mail.id}`
-            ? "/welcome/sent"
-            : "/welcome/starred"
-        );
-      }
-    };
-
-    modifyMail(
-      url,
-      "PUT",
-      {
-        ...mail,
-        trashed: true,
-      },
-      onSuccess
-    );
-    */
     dispatch(showNotification({ message: "¡Operación bloqueada por orden judicial!", variant: "danger" }));
   };
 
   const deleteForeverHandler = () => {
-    /*
-    dispatch(deleteForever({ id: messageId }));
-    history.replace("/welcome/trash");
-    const onSuccess = (response) => {
-      if (response.status === 200) {
-        dispatch(
-          showNotification({
-            message: "Mail deleted forever",
-            variant: "success",
-          })
-        );
-      }
-    };
-
-    modifyMail(url, "DELETE", null, onSuccess);
-    */
     dispatch(showNotification({ message: "¡Operación bloqueada por orden judicial!", variant: "danger" }));
   };
 

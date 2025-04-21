@@ -56,5 +56,17 @@
         "subject": "Secret ",
         "trashed": false,
         "timestamp": "2025-04-19T22:30:00Z"
+    },
+    {
+        "id": "mb0006",
+        "emailContent": "Very long bodyyyyy, but very, very, very long, really, really looooong",
+        "hasRead": true,
+        "isChecked": false,
+        "recipient": "longemailaddress@mail.test",
+        "sender": "alice@mail.test",
+        "starred": true,
+        "subject": "Very long ",
+        "trashed": false,
+        "timestamp": "2025-04-18T22:30:00Z"
     }
 ]

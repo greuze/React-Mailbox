@@ -1,19 +1,14 @@
 import { useState } from "react";
 import { ListGroup, Row, Col, Form } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setChecked , setRead , toggleStarred } from "../../store/mailSlice";
+import { useDispatch } from "react-redux";
+import { setChecked , setRead } from "../../store/mailSlice";
 import { showNotification } from "../../store/authSlice";
-import useAxiosFetch from "../../hooks/useAxiosFetch";
-import { config } from "../../config";
 
 const MailListItems = (props) => {
   const { mail } = props;
-  const email = useSelector((state) => state.auth.email);
-  const senderMail = email.replace(/[.]/g, "");
   const location = useLocation();
   const dispatch = useDispatch();
-  const { fetchData: modifyMail } = useAxiosFetch();
   const onCheckHandler = () => {
     dispatch(setChecked({ id: mail.id, selector: "single" }));
   };
@@ -35,48 +30,15 @@ const MailListItems = (props) => {
     setIsHovered(false);
   };
 
-  const url =
-    mail.sender === email
-      ? `${config.apiUrl}/sent-emails/${senderMail}/${mail.id}.json`
-      : `${config.apiUrl}/emails/${mail.id}.json`;
-
   const starClickHandler = (event) => {
     event.stopPropagation();
     event.preventDefault();
 
-    /*
-    dispatch(toggleStarred({ id: mail.id }));
-
-    modifyMail(url, "PUT", {
-      ...mail,
-      starred: !mail.starred,
-    });
-    */
    dispatch(showNotification({ message: "¡Operación bloqueada por orden judicial!", variant: "danger" }));
   };
 
   const onClickHandler = () => {
     dispatch(setChecked({ id: null, selector: "none" }));
-
-    /*
-    const onSuccess = (response) => {
-      if (response.status === 200) {
-        dispatch(setRead({ id: mail.id }));
-      }
-    };
-
-    if (!mail.hasRead) {
-      modifyMail(
-        url,
-        "PUT",
-        {
-          ...mail,
-          hasRead: true,
-        },
-        onSuccess
-      );
-    }
-    */
     dispatch(setRead({ id: mail.id }));
   };
 
@@ -107,7 +69,7 @@ const MailListItems = (props) => {
       onMouseLeave={handleMouseLeave}
     >
       <Row>
-        <Col lg="3">
+        <Col lg="12">
           <div className="d-flex">
             <Form>
               <Form.Check
@@ -118,48 +80,30 @@ const MailListItems = (props) => {
             </Form>
 
             <div>
-              {mail.starred ? (
-                <i
-                  className={`bi bi-star-fill text-warning px-1 ms-2 ${
-                    starHovered ? "bg-secondary rounded bg-opacity-10" : ""
-                  }`}
-                  onClick={starClickHandler}
-                  onMouseEnter={starMouseEnter}
-                  onMouseLeave={starMouseLeave}
-                />
-              ) : (
-                <i
-                  className={`bi bi-star  px-1 ms-2 ${
-                    starHovered ? "bg-secondary rounded bg-opacity-10" : ""
-                  }`}
-                  onClick={starClickHandler}
-                  onMouseEnter={starMouseEnter}
-                  onMouseLeave={starMouseLeave}
-                />
-              )}
+              <i className={`bi ${mail.starred ? "bi-star-fill text-warning" : "bi-star"} px-1 ms-1 ${
+                  starHovered ? "bg-secondary rounded bg-opacity-10" : ""
+                }`}
+                onClick={starClickHandler}
+                onMouseEnter={starMouseEnter}
+                onMouseLeave={starMouseLeave}
+              />
             </div>
 
-            <p className="ps-3 m-0">
-              <i
-                className={`bi ${
-                  mail.hasRead ? "invisible" : ""
-                } bi-record-fill text-primary pe-1`}
-              ></i>
-              {mail.sender}
-            </p>
-          </div>{" "}
+            {mail.hasRead ? (<></>) : (
+            <i className={`bi bi-record-fill text-primary`}></i>
+            )}
+
+            <div style={{wordBreak: "break-all"}}>{mail.sender}</div>
+            <div style={{marginLeft: "auto"}}>{dateFormat.format(new Date(mail.timestamp))}</div>
+          </div>
         </Col>
+      </Row>
+      <Row>
         <Col lg="8" className="pt-1 pt-lg-0">
           <div>
             <span>{mail.subject}</span>
-            <span className="ps-2" style={{fontStyle: 'italic'}}>{`${mail.emailContent.substring(
-              0,
-              70
-            )}...`}</span>
+            <span className="ps-2" style={{fontStyle: 'italic'}}>{`${mail.emailContent.substring(0, 50)}...`}</span>
           </div>
-        </Col>
-        <Col lg="1" className="text-end">
-          <span>{dateFormat.format(new Date(mail.timestamp))}</span>
         </Col>
       </Row>
     </ListGroup.Item>
