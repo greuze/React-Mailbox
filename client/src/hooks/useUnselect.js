@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { setChecked,  } from "../store/mailSlice";
+import { setChecked } from "../store/mailSlice";
 import { showNotification } from "../store/authSlice";
 const useUnselect = (dispatch) => {
     useEffect(() => {

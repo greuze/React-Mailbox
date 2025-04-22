@@ -1,6 +1,6 @@
-# Mail Box Client App
+# Mail Box Server App
 
-This is a mock Mailbox Client App built using React and Redux. Sending, deleting ans starring e-mails are disabled.
+This is a mock Mailbox Server App built using Express.js. It uses static files to store credentials and e-mails. Sending, deleting ans starring e-mails are disabled.
 
 ##  Features
 
@@ -14,12 +14,10 @@ This is a mock Mailbox Client App built using React and Redux. Sending, deleting
 
  ## Technologies Used
 
-* React
-* Redux
-* React-bootstrap
+* Express.js
 
 ## Usage
 
-1. Open the server app, that will serve the e-mails and accounts for auth.
-2. Set the server endpoint in config file.
-3. Open the client app, and start using it.
+1. Edit accounts.json file with desired e-mail account and passwords.
+2. Edit emails.json file with desired e-mails.
+3. Start the server.

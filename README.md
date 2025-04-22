@@ -1,6 +1,6 @@
-# Mail Box Client App
+# Mail Box App
 
-This is a mock Mailbox Client App built using React and Redux. Sending, deleting ans starring e-mails are disabled.
+This is a mock Mailbox App built using React, Redux, and Express.js. Sending, deleting ans starring e-mails are disabled.
 
 ##  Features
 

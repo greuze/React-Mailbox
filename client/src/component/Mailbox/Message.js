@@ -95,7 +95,7 @@ const Message = () => {
           </div>
           <div className="pt-2">
             <span className="fw-bold">Para: </span>
-            <span>{mail.recipient}</span>
+            <span>{mail.recipients.join(", ")}</span>
           </div>
           <div className="pt-2">
             <span className="fw-bold">Fecha: </span>

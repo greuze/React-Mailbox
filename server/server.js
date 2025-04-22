@@ -12,7 +12,7 @@ app.use(express.json());
 app.post('/emails', (request, response) => {
     const email = request.body?.email;
     if (email) {
-        const filteredEmails = emails.filter(e => e.recipient === email || e.sender === email);
+        const filteredEmails = emails.filter(e => e.sender === email || e.recipients.includes(email));
         response.json(filteredEmails);
     } else {
         response.status(401).json({
@@ -22,7 +22,7 @@ app.post('/emails', (request, response) => {
             }
         });
     }
-    console.log(`Getting emails for user ${email}`)
+    console.log(`Getting emails for user ${email} from ip ${request.ip}`);
 });
 
 app.post('/auth', (request, response) => {
@@ -42,7 +42,7 @@ app.post('/auth', (request, response) => {
             }
         });
     }
-    console.log(`Authenticating user ${email}`)
+    console.log(`Authenticating user ${email} from ip ${request.ip}`);
 });
 
 app.listen(port, () => {

@@ -1,4 +1,4 @@
 exports.config = {
     // The URL of the API server
-    apiUrl: 'http://192.168.1.78:9000',
+    apiUrl: process.env.REACT_APP_API_URL,
 };

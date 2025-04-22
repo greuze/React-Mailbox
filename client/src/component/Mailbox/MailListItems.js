@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { ListGroup, Row, Col, Form } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setChecked , setRead } from "../../store/mailSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setChecked, setRead } from "../../store/mailSlice";
 import { showNotification } from "../../store/authSlice";
 
 const MailListItems = (props) => {
+  const email = useSelector((state) => state.auth.email);
   const { mail } = props;
   const location = useLocation();
   const dispatch = useDispatch();
@@ -80,7 +81,7 @@ const MailListItems = (props) => {
             </Form>
 
             <div>
-              <i className={`bi ${mail.starred ? "bi-star-fill text-warning" : "bi-star"} px-1 ms-1 ${
+              <i className={`bi ${mail.starred?.includes(email) ? "bi-star-fill text-warning" : "bi-star"} px-1 ms-1 ${
                   starHovered ? "bg-secondary rounded bg-opacity-10" : ""
                 }`}
                 onClick={starClickHandler}

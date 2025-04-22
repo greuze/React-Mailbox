@@ -13,7 +13,7 @@ const Inbox = () => {
   const isLoading = useSelector((state) => state.mail.isLoading);
   const email = useSelector((state) => state.auth.email);
   const filteredMails = mails.filter(
-    (mail) => mail.trashed === false && mail.recipient === email
+    (mail) => mail.recipients.includes(email) && !mail.trashed?.includes(email)
   );
 
   const isDeleteEnabled = filteredMails.some((mail) => mail.isChecked);

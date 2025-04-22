@@ -1,29 +1,24 @@
-import MailboxEditor from "../component/Mailbox/MailboxEditor";
-import { Route, NavLink } from "react-router-dom";
-import {
-  Row,
-  Col,
-  ButtonGroup,
-  ToggleButton,
-  Container,
-  Offcanvas,
-} from "react-bootstrap";
 import { useState } from "react";
+import { Route, NavLink } from "react-router-dom";
+import { Row, Col, ButtonGroup, ToggleButton, Container, Offcanvas } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import MailboxEditor from "../component/Mailbox/MailboxEditor";
 import Inbox from "../component/Mailbox/Inbox";
 import Message from "../component/Mailbox/Message";
 import Logout from "../component/userAuth/Logout";
 import Sent from "../component/Sent/Sent";
-import { useSelector } from "react-redux";
 import Trash from "../component/Trash/Trash";
 import Notification from "../component/UI/Notification";
 import Starred from "../component/Starred/Starred";
+import useUnselect from "../hooks/useUnselect";
+
 const Welcome = () => {
   const [show, setShow] = useState(false);
   const mails = useSelector((state) => state.mail.mails);
   const email = useSelector((state) => state.auth.email);
   const { message, variant } = useSelector((state) => state.auth.notification);
   const filteredMails = mails.filter(
-    (mail) => mail.recipient === email && mail.trashed === false
+    (mail) => mail.recipients.includes(email) && !mail.trashed?.includes(email)
   );
   let unread = 0;
   filteredMails.forEach((mail) => {
@@ -38,6 +33,9 @@ const Welcome = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const dispatch = useDispatch();
+  useUnselect(dispatch)
 
   return (
     <Container fluid>
