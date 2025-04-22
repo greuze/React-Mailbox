@@ -40,7 +40,11 @@ const MailListItems = (props) => {
 
   const onClickHandler = () => {
     dispatch(setChecked({ id: null, selector: "none" }));
-    dispatch(setRead({ id: mail.id }));
+    dispatch(setRead({ id: mail.id, email }));
+  };
+
+  const shouldMarkAsRead = (mail, userEmail) => {
+    return mail.read?.includes(userEmail) || mail.sender === userEmail;
   };
 
   const dateFormat = new Intl.DateTimeFormat("es-ES", {
@@ -64,7 +68,7 @@ const MailListItems = (props) => {
       className={`mb-1 py-2 border-bottom ${
         mail.isChecked ? "bg-success bg-opacity-25" : ""
       } ${isHovered ? "shadow-sm" : ""}`}
-      style={mail.hasRead ? {} : { fontWeight: "bold", backgroundColor: "#f8f9fa" }}
+      style={shouldMarkAsRead(mail, email) ? {} : { fontWeight: "bold", backgroundColor: "#f8f9fa" }}
       onClick={onClickHandler}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -90,7 +94,7 @@ const MailListItems = (props) => {
               />
             </div>
 
-            {mail.hasRead ? (<></>) : (
+            {shouldMarkAsRead(mail, email) ? (<></>) : (
             <i className={`bi bi-record-fill text-primary`}></i>
             )}
 

@@ -24,7 +24,7 @@ const mailSlice = createSlice({
         state.mails = state.mails.map((mail) => {
           return {
             ...mail,
-            isChecked: checked ? true : false,
+            isChecked: checked,
           };
         });
       } else if (selector === "allMark" || selector === "none") {
@@ -34,26 +34,15 @@ const mailSlice = createSlice({
             isChecked: selector === "allMark",
           };
         });
-      } else if (selector === "read" || selector === "unread") {
-        state.mails = state.mails.map((mail) => {
-          return {
-            ...mail,
-            isChecked: mail.hasRead === (selector === "read"),
-          };
-        });
-      } else if (selector === "starred" || selector === "unstarred") {
-        state.mails = state.mails.map((mail) => {
-          return {
-            ...mail,
-            isChecked: mail.starred === (selector === "starred"),
-          };
-        });
       }
     },
     setRead: (state, action) => {
-      const { id } = action.payload;
+      const { id, email } = action.payload;
       const mailItem = state.mails.find((mail) => mail.id === id);
-      mailItem.hasRead = true;
+      mailItem.read = mailItem.read || [];
+      if (!mailItem.read.includes(email)) {
+        mailItem.read.push(email);
+      }
     },
     clearInbox: (state) => {
       state.mails = [];

@@ -17,7 +17,10 @@ function App() {
 
     useEffect(() => {
     const onSuccess = (response) => {
-      const mails = response?.data;
+      const mails = response?.data.map((mail) => ({
+        ...mail,
+        isChecked: false
+      }));
 
       dispatch(addToInbox(mails));
     };

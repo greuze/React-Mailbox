@@ -2,7 +2,6 @@
     {
         "id": "mb0001",
         "emailContent": "Hola",
-        "hasRead": false,
         "recipients": ["alice@mail.test"],
         "sender": "bob@mail.test",
         "subject": "Greetings",
@@ -12,7 +11,6 @@
     {
         "id": "mb0002",
         "emailContent": "1245sadfasdf ",
-        "hasRead": false,
         "recipients": ["alice@mail.test"],
         "sender": "bob@mail.test",
         "starred": [],
@@ -23,7 +21,7 @@
     {
         "id": "mb0003",
         "emailContent": "Hola",
-        "hasRead": true,
+        "read": ["bob@mail.test"],
         "recipients": ["bob@mail.test", "boss@mail.test"],
         "sender": "alice@mail.test",
         "starred": ["alice@mail.test", "bob@mail.test"],
@@ -33,7 +31,7 @@
     {
         "id": "mb0004",
         "emailContent": "ADAWd er tewrt wert  wert wer ter \n\nwerwer\n\nwq23423423423423  234 23234234 234234 234 23423 4🤗\n\n😈",
-        "hasRead": true,
+        "read": ["bob@mail.test"],
         "recipients": ["bob@mail.test"],
         "sender": "alice@mail.test",
         "subject": "jskadhgf ",
@@ -43,7 +41,7 @@
     {
         "id": "mb0005",
         "emailContent": "Super secret email",
-        "hasRead": true,
+        "read": [],
         "recipients": ["boss@mail.test"],
         "sender": "alice@mail.test",
         "starred": ["alice@mail.test"],
@@ -53,11 +51,19 @@
     {
         "id": "mb0006",
         "emailContent": "Very long bodyyyyy, but very, very, very long, really, really looooong",
-        "hasRead": true,
         "recipients": ["longemailaddress@mail.test"],
         "sender": "alice@mail.test",
         "starred": ["alice@mail.test"],
         "subject": "Very long ",
+        "timestamp": "2025-04-18T22:30:00Z"
+    },
+    {
+        "id": "mb0007",
+        "emailContent": "You are the best employee we could dream of",
+        "recipients": ["alice@mail.test"],
+        "sender": "boss@mail.test",
+        "starred": ["alice@mail.test"],
+        "subject": "You are the best",
         "timestamp": "2025-04-18T22:30:00Z"
     }
 ]

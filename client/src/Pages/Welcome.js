@@ -22,7 +22,7 @@ const Welcome = () => {
   );
   let unread = 0;
   filteredMails.forEach((mail) => {
-    if (!mail.hasRead) {
+    if (!mail.read?.includes(email)) {
       unread++;
     }
   });
