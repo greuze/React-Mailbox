@@ -43,7 +43,7 @@ const Message = () => {
   }
 
   const dateFormat = new Intl.DateTimeFormat("es-ES", {
-    timeZone: "UTC",
+    timeZone: "+02:00",
     year: "numeric",
     month: "long",
     day: "2-digit",
@@ -60,7 +60,7 @@ const Message = () => {
           style={{ cursor: "pointer" }}
         >
           <i className="bi bi-arrow-left pe-2"></i>
-          <span>Back</span>
+          <span>Atrás</span>
         </p>
 
         {location.pathname !== `/welcome/trash/${messageId}` ? (

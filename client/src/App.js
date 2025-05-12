@@ -10,12 +10,12 @@ import { config } from "./config";
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const recipientMail = useSelector((state) => state.auth.email);
+  const mails = useSelector((state) => state.mail.mails);
 
   const { fetchData: fetchMails } = useAxiosFetch();
   const dispatch = useDispatch();
-  const url = `${config.apiUrl}/emails`;
 
-    useEffect(() => {
+  useEffect(() => {
     const onSuccess = (response) => {
       const mails = response?.data.map((mail) => ({
         ...mail,
@@ -26,6 +26,7 @@ function App() {
     };
 
     if (recipientMail) {
+      const url = `${config.apiUrl}/emails`;
       fetchMails(url, "POST", {email: recipientMail}, onSuccess);
     }
 
@@ -34,6 +35,32 @@ function App() {
     };
     // eslint-disable-next-line
   }, [recipientMail, dispatch, fetchMails]);
+
+  useEffect(() => {
+    const onSuccess = (response) => {
+      const newMails = response?.data.map((mail) => ({
+        ...mail,
+        isChecked: false
+      }));
+
+      newMails.forEach((mail) => {
+        if (!mails.some((email) => email.id === mail.id)) {
+          dispatch(addToInbox([mail]));
+        }
+      });
+    };
+
+    const interval = setInterval(() => {
+      if (recipientMail) {
+        const url = `${config.apiUrl}/emails`;
+        fetchMails(url, "POST", {email: recipientMail}, onSuccess);
+      }
+    }, 30000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [fetchMails, recipientMail, mails, dispatch]);
 
   return (
     <Switch>

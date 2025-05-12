@@ -6,7 +6,7 @@
         "sender": "bob@mail.test",
         "subject": "Greetings",
         "trashed": [],
-        "timestamp": "2025-04-21T12:00:00Z"
+        "timestamp": "2025-04-21T12:25:00+02:00"
     },
     {
         "id": "mb0002",
@@ -16,7 +16,7 @@
         "starred": [],
         "subject": "Test",
         "trashed": ["alice@mail.test", "bob@mail.test"],
-        "timestamp": "2025-04-21T13:05:00Z"
+        "timestamp": "2025-04-21T13:05:00+02:00"
     },
     {
         "id": "mb0003",
@@ -26,7 +26,7 @@
         "sender": "alice@mail.test",
         "starred": ["alice@mail.test", "bob@mail.test"],
         "subject": "Daily Report",
-        "timestamp": "2025-04-21T14:50:00Z"
+        "timestamp": "2025-04-21T14:50:00+02:00"
     },
     {
         "id": "mb0004",
@@ -36,7 +36,7 @@
         "sender": "alice@mail.test",
         "subject": "jskadhgf ",
         "trashed": ["alice@mail.test"],
-        "timestamp": "2025-04-20T15:12:00Z"
+        "timestamp": "2025-04-20T15:12:00+02:00"
     },
     {
         "id": "mb0005",
@@ -46,7 +46,7 @@
         "sender": "alice@mail.test",
         "starred": ["alice@mail.test"],
         "subject": "Secret ",
-        "timestamp": "2025-04-19T22:30:00Z"
+        "timestamp": "2025-04-19T22:30:00+02:00"
     },
     {
         "id": "mb0006",
@@ -55,7 +55,7 @@
         "sender": "alice@mail.test",
         "starred": ["alice@mail.test"],
         "subject": "Very long ",
-        "timestamp": "2025-04-18T22:30:00Z"
+        "timestamp": "2025-04-18T22:30:00+02:00"
     },
     {
         "id": "mb0007",
@@ -64,6 +64,14 @@
         "sender": "boss@mail.test",
         "starred": ["alice@mail.test"],
         "subject": "You are the best",
-        "timestamp": "2025-04-18T22:30:00Z"
+        "timestamp": "2025-04-18T22:30:00+02:00"
+    },
+    {
+        "id": "mb0008",
+        "emailContent": "New",
+        "recipients": ["alice@mail.test"],
+        "sender": "bob@mail.test",
+        "subject": "Very new e-mail",
+        "timestamp": "2025-05-12T14:05:00+02:00"
     }
 ]

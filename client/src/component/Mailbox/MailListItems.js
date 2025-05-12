@@ -48,7 +48,7 @@ const MailListItems = (props) => {
   };
 
   const dateFormat = new Intl.DateTimeFormat("es-ES", {
-    timeZone: "UTC",
+    timeZone: "+02:00",
     month: "short",
     day: "2-digit"
   });

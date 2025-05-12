@@ -12,7 +12,29 @@ app.use(express.json());
 app.post('/emails', (request, response) => {
     const email = request.body?.email;
     if (email) {
-        const filteredEmails = emails.filter(e => e.sender === email || e.recipients.includes(email));
+        console.log(`Getting emails for user ${email} from ip ${request.ip}`);
+        const filteredEmails = emails.filter(e => {
+            if (e.sender === email || e.recipients.includes(email)) {
+                const emailTimestamp = new Date(e.timestamp);
+                if (isNaN(emailTimestamp)) {
+                    console.log(`E-mail ${e.id} for user ${email} has an incorrect timestamp ${e.timestamp}`);
+                    return false;
+                }
+                const diff = emailTimestamp.getTime() - new Date().getTime();
+                if (diff < 0) {
+                    // E-mail timestamp is in the past
+                    return true;
+                } else {
+                    console.log(`Future e-mail ${e.id} for user ${email} will be sent in ` +
+                            `${Math.floor(diff / 60000)} minutes and ` +
+                            `${Math.floor((diff % 60000) / 1000)} seconds`
+                    );
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        });
         response.json(filteredEmails);
     } else {
         response.status(401).json({
@@ -22,7 +44,6 @@ app.post('/emails', (request, response) => {
             }
         });
     }
-    console.log(`Getting emails for user ${email} from ip ${request.ip}`);
 });
 
 app.post('/auth', (request, response) => {

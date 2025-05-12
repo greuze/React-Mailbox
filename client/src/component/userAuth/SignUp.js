@@ -67,8 +67,8 @@ const SignUp = () => {
         <Col>
           <div className="text-center pb-4">
             <h3>
-              Bienvenido a{" "}
-              <span className="text-danger fst-italic">Mail Box Client </span>
+              Bienvenido al{" "}
+              <span className="text-danger fst-italic">correo</span>
             </h3>
             <p>Por favor, introduzca sus datos para continuar.</p>
           </div>
@@ -76,7 +76,7 @@ const SignUp = () => {
             style={{ maxWidth: "25rem" }}
             className="text-center bg-danger bg-gradient mx-auto rounded-top py-1"
           >
-            <i className="bi bi-envelope-at-fill fs-1 text-light"></i>
+            <i className="bi bi-envelope-at-fill fs-1 text-light"> Espino S.A.</i>
           </div>
           <Form
             onSubmit={onSubmitHandler}
