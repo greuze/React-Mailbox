@@ -5,8 +5,8 @@
         "recipients": ["alice@mail.test"],
         "sender": "bob@mail.test",
         "subject": "Greetings",
-        "trashed": [],
-        "timestamp": "2025-04-21T12:25:00+02:00"
+        "timestamp": "2025-04-21T12:25:00+02:00",
+        "trashed": []
     },
     {
         "id": "mb0002",
@@ -15,8 +15,8 @@
         "sender": "bob@mail.test",
         "starred": [],
         "subject": "Test",
-        "trashed": ["alice@mail.test", "bob@mail.test"],
-        "timestamp": "2025-04-21T13:05:00+02:00"
+        "timestamp": "2025-04-21T13:05:00+02:00",
+        "trashed": ["alice@mail.test", "bob@mail.test"]
     },
     {
         "id": "mb0003",
@@ -35,8 +35,8 @@
         "recipients": ["bob@mail.test"],
         "sender": "alice@mail.test",
         "subject": "jskadhgf ",
-        "trashed": ["alice@mail.test"],
-        "timestamp": "2025-04-20T15:12:00+02:00"
+        "timestamp": "2025-04-20T15:12:00+02:00",
+        "trashed": ["alice@mail.test"]
     },
     {
         "id": "mb0005",
@@ -68,7 +68,7 @@
     },
     {
         "id": "mb0008",
-        "emailContent": "New",
+        "emailContent": "New <h1>e-mail</h1>",
         "recipients": ["alice@mail.test"],
         "sender": "bob@mail.test",
         "subject": "Very new e-mail",
